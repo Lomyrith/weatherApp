@@ -1,0 +1,67 @@
+@use "variables" as *;
+
+.overView {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: $text-font;
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+
+  &__Header {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__Title {
+    font-size: 2rem;
+  }
+
+  &__changeButton {
+    cursor: pointer;
+    text-decoration: none;
+    background-color: $button-color;
+    color: $text-color;
+    font-size: 0.7rem;
+    font-weight: bold;
+    border-radius: $border-radius;
+    padding: 0.5rem;
+    margin-top: 1rem;
+    margin-right: 0.2rem;
+
+    &:hover {
+      background-color: $button-color--hover;
+    }
+  }
+
+  &__SearchContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    font-size: 0.5rem;
+    width: 100%;
+    padding: 0 0.5rem;
+
+    .search-box {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      width: 100%;
+      margin-top: 1rem;
+      position: relative;
+    }
+
+    .search-input {
+      font-size: 0.7rem;
+      flex-grow: 1;
+      width: 100%;
+      box-sizing: border-box;
+    }
+  }
+}

@@ -1,0 +1,10 @@
+@use "fontFaces" as *;
+
+$border-radius: 6px;
+$text-color: whiteSmoke;
+$text-font: "Inter", sans-serif;
+$text-shadow: 1px 1px 5px #000;
+$box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+$button-color: transparent;
+$button-color--hover: rgb(0, 132, 255);
+$largeScreens--max-Heigth: 900px;
