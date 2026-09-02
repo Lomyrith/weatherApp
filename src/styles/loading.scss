@@ -1,6 +1,8 @@
 @use "variables" as *;
 @use "mixins" as *;
 .loading {
+  position: fixed;
+  z-index: 999;
   height: 100vh;
   display: flex;
   flex-direction: column;

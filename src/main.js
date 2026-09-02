@@ -1,13 +1,33 @@
 import "./styles/main.scss";
+import {
+  renderLoadingScreen,
+  hideLoadingScreen,
+} from "./components/loading.js";
 import { getForecastWeather } from "./weatherApi.js";
-import { loadTopInfos } from "./components/topInfos.js";
 import { Overview } from "./components/overview.js";
-import { SearchField } from "./components/searchField.js";
+import { loadTopInfos, setTopInfos } from "./components/topInfos.js";
+import * as forecast from "./components/hoursForecast.js";
 
 export const rootElement = document.querySelector("#app");
-let value = "London";
+let value = "Arnsberg";
 
-loadTopInfos(value);
+showDetails(value);
+
+async function showDetails(value) {
+  console.log("showDetails");
+  console.log(value);
+  renderLoadingScreen(`Lade Wetterdaten für ${value}...`);
+  loadTopInfos(value);
+  forecast.appendForecastUI(rootElement);
+  let currentWeather = await getForecastWeather(value);
+
+  if (currentWeather) {
+    setTopInfos(currentWeather);
+    console.log(currentWeather);
+    forecast.setForecastData(currentWeather);
+    hideLoadingScreen();
+  }
+}
 
 // const overview = new Overview("#app");
 // const searchField = new SearchField(".overView__SearchContainer", {

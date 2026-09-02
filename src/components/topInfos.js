@@ -1,21 +1,15 @@
 import { rootElement } from "../main.js";
-import { renderLoadingScreen } from "./loading.js";
+import { renderLoadingScreen, hideLoadingScreen } from "./loading.js";
 import { getForecastWeather } from "../weatherApi.js";
+import { appendForecastUI, setForecastData } from "./hoursForecast.js";
 
 export async function loadTopInfos(value = "Arnsberg") {
-  renderLoadingScreen(`Lade Wetterdaten für ${value}...`);
-
-  let currentWeather = await getForecastWeather(value);
-  console.log(currentWeather);
-  if (currentWeather) {
-    renderTopInfos();
-    setTopInfos(currentWeather);
-  }
+  renderTopInfos();
 }
 
 function renderTopInfos() {
   const topInfos = getTopInfosHtml();
-  rootElement.innerHTML = topInfos;
+  rootElement.innerHTML += topInfos;
 }
 
 function getTopInfosHtml() {
