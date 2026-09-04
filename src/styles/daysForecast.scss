@@ -1,0 +1,101 @@
+@use "variables" as *;
+
+.dailyForecast {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
+  text-shadow: $text-shadow;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+
+  &__info {
+    font-size: 0.9rem;
+    margin: 0.7rem 0.5rem;
+    color: $text-color;
+    text-shadow: $text-shadow;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    max-width: 100%;
+    margin: 0;
+    padding: 0 0.5rem;
+    align-items: center;
+    justify-content: flex-start;
+    white-space: nowrap;
+
+    list-style: none; //entfernt Standard-Nummeriuerung
+    overflow-x: auto;
+    //Scrollbar ausblenden aber verwendbar lassen:
+    /* Für Firefox */
+    scrollbar-width: none;
+
+    /* Für Internet Explorer / Edge (legacy) */
+    -ms-overflow-style: none;
+
+    /* Für Chrome, Safari und Opera */
+    .horizontal-list::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0rem;
+    width: 100%;
+    margin: 0;
+    padding: 0 0.5rem;
+    border-top: 1px solid $text-color;
+  }
+
+  &__date {
+    font-size: 0.9rem;
+    font-weight: 500;
+    flex: 0 0 25%;
+    text-align: left;
+    color: $text-color;
+    text-shadow: $text-shadow;
+    grid-column: 1;
+    position: relative;
+  }
+
+  &__icon {
+    flex: 0 0 12%;
+    width: 12%;
+    text-align: center;
+  }
+
+  &__MaxTemperature,
+  &__MinTemperature {
+    flex: 0 0 17%;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-align: right;
+    margin: 0;
+    &::after {
+      content: " °C";
+    }
+  }
+
+  &__MaxWind {
+    font-size: 0.9rem;
+    font-weight: 500;
+    flex: 0 0 30%;
+    margin-left: 2%;
+
+    &::before {
+      content: "Wind ";
+    }
+
+    &::after {
+      content: " km/h";
+    }
+  }
+}

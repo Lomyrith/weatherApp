@@ -1,17 +1,17 @@
 import { rootElement } from "../main.js";
 
 export function appendForecastUI(component) {
-  const forecastHtml = getForecastHtml();
   if (!component) {
     component = rootElement;
   }
+  const forecastHtml = getForecastHtml();
   component.appendChild(forecastHtml);
 }
 
 export function setForecastData(data) {
   if (data) {
-    console.log("setForecastData");
-    console.log(data);
+    //console.log("setForecastData");
+    //console.log(data);
 
     let hours = getNext24Hours(data);
 
@@ -22,7 +22,7 @@ export function setForecastData(data) {
     let list = document.querySelector(".forecast__hours__list");
     if (list) {
       hours.forEach((hour) => {
-        console.log(hour);
+        //console.log(hour);
         var hourListItem = getForecastListItem(hour);
         list.appendChild(hourListItem);
       });
@@ -76,7 +76,7 @@ function getForecastListItem(hourInfo) {
   const temperatureElement = forecastItemNode.querySelector(
     ".forecast__hour__temperature",
   );
-  console.log(hourInfo);
+  //console.log(hourInfo);
 
   const formattedTime = new Date(hourInfo.time).toLocaleTimeString([], {
     hour: "2-digit",
@@ -102,10 +102,10 @@ function getNext24Hours(currentWeather) {
   const currentEpoch = currentWeather.location.localtime_epoch;
 
   const next24Hours = [
-    ...currentWeather.forecast.forecastday[0].hour,
-    ...currentWeather.forecast.forecastday[1].hour,
+    ...(currentWeather.forecast.forecastday[0].hour ?? []),
+    ...(currentWeather.forecast.forecastday[1].hour ?? []),
   ]
-    .filter((hour) => hour.time_epoch >= currentEpoch)
+    .filter((hour) => hour?.time_epoch >= currentEpoch)
     .slice(0, 24);
 
   return next24Hours;

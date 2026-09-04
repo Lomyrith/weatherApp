@@ -7,9 +7,11 @@ import { getForecastWeather } from "./weatherApi.js";
 import { Overview } from "./components/overview.js";
 import { loadTopInfos, setTopInfos } from "./components/topInfos.js";
 import * as forecast from "./components/hoursForecast.js";
+import * as dailyForecast from "./components/daysForecast.js";
 
 export const rootElement = document.querySelector("#app");
-let value = "Arnsberg";
+let value = "Dortmund";
+let amountDays = 3;
 
 showDetails(value);
 
@@ -19,29 +21,14 @@ async function showDetails(value) {
   renderLoadingScreen(`Lade Wetterdaten für ${value}...`);
   loadTopInfos(value);
   forecast.appendForecastUI(rootElement);
-  let currentWeather = await getForecastWeather(value);
+  dailyForecast.appendDailyForecastUI(rootElement);
+  let currentWeather = await getForecastWeather(value, amountDays);
 
   if (currentWeather) {
     setTopInfos(currentWeather);
-    console.log(currentWeather);
+
     forecast.setForecastData(currentWeather);
+    dailyForecast.setDailyForecastData(currentWeather, amountDays);
     hideLoadingScreen();
   }
 }
-
-// const overview = new Overview("#app");
-// const searchField = new SearchField(".overView__SearchContainer", {
-//   placeholder: "Suche nach einer Stadt....",
-//   onSearch: async (value) => {
-//     console.log(value + "test");
-//     const currentWeather = await getForecastWeather(value);
-//     console.log(currentWeather);
-//     if (currentWeather) {
-//       loadTopInfos(currentWeather);
-//     }
-//   },
-// });
-
-//loadTopInfos();
-
-//document.querySelector("overView__changeButton").addEventListener("click", () => {
