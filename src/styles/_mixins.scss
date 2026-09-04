@@ -1,5 +1,19 @@
+@use "variables" as *;
+
 @mixin largeScreens {
   @media screen and (min-width: 700px) {
     @content;
   }
+}
+
+@mixin infoBox_base {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+  height: 8rem;
 }

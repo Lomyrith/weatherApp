@@ -76,14 +76,11 @@ function getDailyForecastListItem(day, list) {
     today === day.date
       ? "Heute"
       : new Date(day.date).toLocaleDateString("de-DE", {
-          day: "2-digit",
-          month: "2-digit",
-          year: "numeric",
+          weekday: "short",
         });
 
   const itemContainer = createElement("div", "dailyForecast__item");
 
-  //logConsole("date", today === day.date ? "Heute" : day.date);
   const daySpan = createElement("span", "dailyForecast__date", dateText);
   const icon = createElement("img", "dailyForecast__icon");
   icon.src = day.day.condition.icon;

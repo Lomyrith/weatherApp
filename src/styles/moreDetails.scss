@@ -1,0 +1,38 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+.moreDetails {
+  &__container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    box-shadow: $box-shadow;
+    border-radius: $border-radius;
+    margin: 0.5rem;
+    padding: 0.1rem;
+  }
+
+  &__infoBox {
+    @include infoBox_base;
+
+    &--wide {
+      @include infoBox_base;
+      grid-column: span 2;
+    }
+    &__title {
+      font-size: 1rem;
+      font-weight: 500;
+      color: $text-color;
+      text-shadow: $text-shadow;
+      height: 2rem;
+    }
+
+    &__value {
+      font-size: 0.9rem;
+      height: 5rem;
+
+      &.humidity::after {
+        content: " %";
+      }
+    }
+  }
+}

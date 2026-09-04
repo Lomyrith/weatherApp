@@ -8,6 +8,7 @@ import { Overview } from "./components/overview.js";
 import { loadTopInfos, setTopInfos } from "./components/topInfos.js";
 import * as forecast from "./components/hoursForecast.js";
 import * as dailyForecast from "./components/daysForecast.js";
+import * as moreDetails from "./components/moreDetails.js";
 
 export const rootElement = document.querySelector("#app");
 let value = "Dortmund";
@@ -29,6 +30,7 @@ async function showDetails(value) {
 
     forecast.setForecastData(currentWeather);
     dailyForecast.setDailyForecastData(currentWeather, amountDays);
+    moreDetails.getMoreDetails(currentWeather);
     hideLoadingScreen();
   }
 }
