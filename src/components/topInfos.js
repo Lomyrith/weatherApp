@@ -1,7 +1,4 @@
 import { rootElement } from "../main.js";
-import { renderLoadingScreen, hideLoadingScreen } from "./loading.js";
-import { getForecastWeather } from "../weatherApi.js";
-import { appendForecastUI, setForecastData } from "./hoursForecast.js";
 
 export async function loadTopInfos(value = "Arnsberg") {
   renderTopInfos();

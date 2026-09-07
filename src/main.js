@@ -5,13 +5,14 @@ import {
 } from "./components/loading.js";
 import { getForecastWeather } from "./weatherApi.js";
 import { Overview } from "./components/overview.js";
+import { setBackgroundImage } from "./components/background.js";
 import { loadTopInfos, setTopInfos } from "./components/topInfos.js";
 import * as forecast from "./components/hoursForecast.js";
 import * as dailyForecast from "./components/daysForecast.js";
 import * as moreDetails from "./components/moreDetails.js";
 
 export const rootElement = document.querySelector("#app");
-let value = "Dortmund";
+let value = "Dänemark";
 let amountDays = 3;
 
 showDetails(value);
@@ -26,6 +27,7 @@ async function showDetails(value) {
   let currentWeather = await getForecastWeather(value, amountDays);
 
   if (currentWeather) {
+    setBackgroundImage(currentWeather);
     setTopInfos(currentWeather);
 
     forecast.setForecastData(currentWeather);

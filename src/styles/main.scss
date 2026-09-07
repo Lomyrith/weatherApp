@@ -45,4 +45,12 @@ body {
     border-radius: $border-radius;
     box-shadow: 1px 1px 5px black;
   }
+
+  &.showBackground {
+    background-image:
+      linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+      var(--detail-condition-image);
+    background-size: cover;
+    background-position: center;
+  }
 }
