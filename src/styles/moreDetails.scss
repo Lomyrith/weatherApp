@@ -18,20 +18,37 @@
       @include infoBox_base;
       grid-column: span 2;
     }
+
     &__title {
       font-size: 1rem;
       font-weight: 500;
       color: $text-color;
       text-shadow: $text-shadow;
-      height: 2rem;
+      margin: 0;
     }
 
     &__value {
       font-size: 0.9rem;
-      height: 5rem;
+      margin: 0;
 
-      &.humidity::after {
+      &.humidity_value::after {
         content: " %";
+      }
+      &.feels_like_value::after {
+        content: " °C";
+      }
+      &.rainChance_value::after {
+        content: " %";
+      }
+      //NotTodo
+      // &.moonPhase_value::after {
+      //   content: "";
+      // }
+      &.wind_value::after {
+        content: " km/h";
+      }
+      &.pressure_value::after {
+        content: " hPa";
       }
     }
   }
