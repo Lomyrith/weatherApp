@@ -8,9 +8,12 @@
   text-shadow: $text-shadow;
   margin: 0.5rem;
   border-radius: $border-radius;
-  box-shadow: $box-shadow;
+  border: 1px solid var(--surface-border);
+  box-shadow: var(--surface-shadow);
 
   &__Info {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
     font-size: 0.9rem;
     color: $text-color;
     text-shadow: $text-shadow;
@@ -49,7 +52,8 @@
     justify-content: center;
     gap: 0.5rem;
     border-radius: $border-radius;
-    box-shadow: $box-shadow;
+    border: 1px solid var(--surface-border);
+    box-shadow: var(--surface-shadow);
     min-width: 70px;
     flex-shrink: 0;
 

@@ -1,10 +1,11 @@
 @use "variables" as *;
+@use "sass:color";
 
 .overView {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  align-items: stretch;
   font-family: $text-font;
   width: 100%;
   height: 100%;
@@ -31,7 +32,7 @@
     font-weight: bold;
     border-radius: $border-radius;
     padding: 0.5rem;
-    margin-top: 1rem;
+    margin-top: 0;
     margin-right: 0.2rem;
 
     &:hover {
@@ -40,28 +41,95 @@
   }
 
   &__SearchContainer {
+    position: relative; // Wichtig für die absolute Positionierung der Suggestions!
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    justify-content: center;
+    justify-content: flex-start;
     font-size: 0.5rem;
     width: 100%;
+    min-height: 3rem;
     padding: 0 0.5rem;
+  }
 
-    .search-box {
+  // Auf gleicher Ebene wie SearchContainer schachteln:
+  &__search-input {
+    -webkit-appearance: none;
+    appearance: none;
+    box-sizing: border-box;
+    font-size: 0.7rem;
+    color: $text-color;
+    width: 100%;
+    background-color: transparent;
+    border: 1px solid black;
+    border-radius: $border-radius;
+    outline: none;
+    margin: 0;
+    padding: 0.5rem;
+    min-height: 2rem;
+
+    &::placeholder {
+      color: color.adjust($text-color, $lightness: -10%);
+    }
+
+    &:focus {
+      border-color: $button-color--hover; // Oder eine Akzentfarbe deiner Wahl
+    }
+  }
+
+  // Das Overlay-Dropdown (ul):
+  &__searchSuggestions {
+    position: absolute;
+    top: calc(100% + 2px);
+    left: 0.5rem;
+    right: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    z-index: 1000;
+    max-height: 250px;
+    overflow-y: auto;
+    border-radius: $border-radius;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  }
+
+  &__suggestion {
+    &-item {
       display: flex;
-      flex-direction: row;
-      align-items: center;
-      width: 100%;
-      margin-top: 1rem;
-      position: relative;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 0.5rem;
+      align-items: left;
+      padding: 1rem;
+      cursor: pointer;
+      transition: background-color 0.15s ease-in-out;
+      border-bottom: 1px solid #f2f2f2;
+      background-color: $listItem-background-color;
+      font-size: 0.8rem;
+      color: #f2f2f2;
+      text-shadow: $text-shadow;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      &:hover {
+        background-color: $button-color--hover;
+      }
     }
 
-    .search-input {
-      font-size: 0.7rem;
-      flex-grow: 1;
-      width: 100%;
-      box-sizing: border-box;
+    &-name {
+      font-weight: bold;
     }
+
+    &-meta {
+      font-size: 0.7rem;
+      color: color.adjust($text-color, $lightness: -20%);
+    }
+  }
+
+  &__ListContainer {
+    flex: 1;
+    overflow-y: auto;
   }
 }

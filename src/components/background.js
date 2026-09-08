@@ -13,5 +13,15 @@ export function setBackgroundImage(data) {
       rootElement.classList.add("showBackground");
     }
     rootElement.style = `--detail-condition-image: url(${conditionImagePath});`;
+
+    rootElement.classList.toggle(
+      "is-dark-background",
+      data.current.is_day === 0,
+    );
+
+    rootElement.classList.toggle(
+      "is-light-background",
+      data.current.is_day === 1,
+    );
   }
 }

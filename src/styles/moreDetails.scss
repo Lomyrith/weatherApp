@@ -5,7 +5,8 @@
   &__container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    box-shadow: $box-shadow;
+    border: 1px solid var(--surface-border);
+    box-shadow: var(--surface-shadow);
     border-radius: $border-radius;
     margin: 0.5rem;
     padding: 0.1rem;

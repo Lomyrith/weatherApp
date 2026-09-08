@@ -1,8 +1,8 @@
 @use "mixins" as *;
 @use "variables" as *;
 @use "fontFaces" as *;
-@use "topInfos" as *;
 @use "overView" as *;
+@use "topInfos" as *;
 @use "loading" as *;
 @use "hoursForecast" as *;
 @use "daysForecast" as *;
@@ -12,6 +12,11 @@
 *::before,
 *::after {
   box-sizing: border-box;
+}
+
+:root {
+  --surface-border: rgba(255, 255, 255, 0.3);
+  --surface-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
 }
 
 body {
@@ -26,7 +31,8 @@ body {
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    box-shadow: $box-shadow;
+    border: 1px solid var(--surface-border);
+    box-shadow: var(--surface-shadow);
   }
 }
 
@@ -34,13 +40,13 @@ body {
   background: linear-gradient(0deg, rgb(106, 106, 106) 0%, rgb(35, 35, 35) 60%);
   // background-color: rgb(18, 18, 18);
   color: $text-color;
+  background-color: $app-background-color;
   padding: 0 0.5rem;
-  height: 100vh;
+  min-height: 100vh;
 
   @include largeScreens {
     width: 400px;
-    height: 900px;
-    min-height: unset;
+    min-height: 900px;
     overflow: auto;
     border-radius: $border-radius;
     box-shadow: 1px 1px 5px black;
@@ -48,9 +54,19 @@ body {
 
   &.showBackground {
     background-image:
-      linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+      linear-gradient(rgba(0, 0, 0, 0.28), rgba(0, 0, 0, 0.28)),
       var(--detail-condition-image);
     background-size: cover;
     background-position: center;
   }
+}
+
+#app.is-dark-background {
+  --surface-border: rgba(255, 255, 255, 0.35);
+  --surface-shadow: 0 2px 8px rgba(0, 0, 0, 0.75);
+}
+
+#app.is-light-background {
+  --surface-border: rgba(0, 0, 0, 0.25);
+  --surface-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
 }

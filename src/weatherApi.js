@@ -11,6 +11,17 @@ export async function getCurrentWeather(location = "Arnsberg") {
   return data;
 }
 
+export async function getCitySuggestions(query) {
+  //http://api.weatherapi.com/v1/search.json?key=1f513f9568d542cc8c4112817263108&q=Londo
+  const url = `${API_URL}/search.json?key=${API_KEY}&q=${query}`;
+
+  const response = await fetch(url);
+
+  const data = await response.json();
+
+  return data;
+}
+
 export async function getForecastWeather(
   location = "Arnsberg",
   days = 2,

@@ -9,8 +9,8 @@
   margin: 0.5rem;
   padding: 0.5rem;
   border-radius: $border-radius;
-  box-shadow: $box-shadow;
-
+  border: 1px solid var(--surface-border);
+  box-shadow: var(--surface-shadow);
   &__info {
     font-size: 0.9rem;
     margin: 0.7rem 0.5rem;
