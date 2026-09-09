@@ -22,27 +22,37 @@
 }
 
 @mixin buttonBase {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
   cursor: pointer;
   outline: none;
   border: none;
   text-decoration: none;
-  background-color: $button-color;
   color: $text-color;
   font-weight: bold;
   border-radius: $border-radius;
-  padding: 0.5rem;
-  margin: 0;
+  background-color: transparent;
+  margin: 0.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  appearance: none;
+  -webkit-appearance: none;
 
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    fill: currentColor;
+  }
 
   &:hover {
     color: $button-color--hover;
   }
 
   &:active {
-    transform: scale(0.95); // Leichtes "Eindrücken" beim Klick
+    transform: scale(0.95);
   }
 }
 
