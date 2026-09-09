@@ -1,5 +1,5 @@
 import { logConsole, createElement } from "../utils.js";
-import { rootElement } from "../main.js";
+import { getAppRoot } from "../main.js";
 import * as utils from "../utils.js";
 
 const moonPhaseTranslations = {
@@ -18,7 +18,7 @@ export async function getMoreDetails(data) {
   logConsole("getMoreDetailsHtml", data);
 
   const moreDetails = createElement("div", "moreDetails__container");
-  rootElement.appendChild(moreDetails);
+  getAppRoot().appendChild(moreDetails);
 
   moreDetails.appendChild(
     createInfoBox("Feuchtigkeit", data.current.humidity, "humidity"),

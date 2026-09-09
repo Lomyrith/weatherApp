@@ -1,4 +1,4 @@
-import { rootElement } from "../main.js";
+import { getAppRoot } from "../main.js";
 import { createElement } from "../utils.js";
 import { setBackgroundImageForComponent } from "./background.js";
 
@@ -16,7 +16,7 @@ export class Overview {
   }
 
   render() {
-    rootElement.innerHTML = this.getOverviewTemplate();
+    getAppRoot().innerHTML = this.getOverviewTemplate();
 
     this.renderFavorites();
   }
@@ -43,7 +43,7 @@ export class Overview {
 
   bindEvents() {
     // Bearbeiten-Button Listener
-    const changeBtn = rootElement.querySelector(".overView__changeButton");
+    const changeBtn = getAppRoot().querySelector(".overView__changeButton");
     if (changeBtn) {
       changeBtn.addEventListener("click", (e) => {
         e.preventDefault();
@@ -52,8 +52,8 @@ export class Overview {
     }
 
     // Such-Input Listener
-    const searchInput = rootElement.querySelector(".overView__search-input");
-    const suggestionsList = rootElement.querySelector(
+    const searchInput = getAppRoot().querySelector(".overView__search-input");
+    const suggestionsList = getAppRoot().querySelector(
       ".overView__searchSuggestions",
     );
 
@@ -88,7 +88,7 @@ export class Overview {
   }
 
   updateSearchSuggestions(suggestions = []) {
-    const suggestionsList = rootElement.querySelector(
+    const suggestionsList = getAppRoot().querySelector(
       ".overView__searchSuggestions",
     );
     if (!suggestionsList) return;
@@ -132,7 +132,7 @@ export class Overview {
   }
 
   hideSuggestions() {
-    const suggestionsList = rootElement.querySelector(
+    const suggestionsList = getAppRoot().querySelector(
       ".overView__searchSuggestions",
     );
     if (suggestionsList) {
@@ -141,7 +141,7 @@ export class Overview {
   }
 
   renderFavorites() {
-    const favList = rootElement.querySelector(".overView__favorite__list");
+    const favList = getAppRoot().querySelector(".overView__favorite__list");
 
     if (favList) {
       console.log("render FavList", this.favoriteCities);
@@ -156,7 +156,6 @@ export class Overview {
           this.onSelectCity(item.location);
         });
 
-        //TOdo background --favorite-${favorite_city}-condition-image
         const header = createElement("div", "overView__favorite__header");
         const location = createElement("div", "overView__favorite__location");
 
@@ -179,7 +178,7 @@ export class Overview {
 
         let subInfoText = item.current.condition.text;
         if (item.forecast.forecastday[0]?.day) {
-          subInfoText += ` H:${item.forecast.forecastday[0].day.maxtemp_c} T:${item.forecast.forecastday[0].day.mintemp_c}°C`;
+          subInfoText += ` H:${item.forecast.forecastday[0].day.maxtemp_c}°C T:${item.forecast.forecastday[0].day.mintemp_c}°C`;
         }
         const subInfo = createElement(
           "p",

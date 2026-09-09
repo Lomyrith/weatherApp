@@ -1,4 +1,5 @@
 @use "variables" as *;
+@use "mixins" as *;
 
 .forecast {
   display: flex;
@@ -32,17 +33,7 @@
 
     list-style: none; //entfernt Standard-Nummeriuerung
     overflow-x: auto;
-    //Scrollbar ausblenden aber verwendbar lassen:
-    /* Für Firefox */
-    scrollbar-width: none;
-
-    /* Für Internet Explorer / Edge (legacy) */
-    -ms-overflow-style: none;
-
-    /* Für Chrome, Safari und Opera */
-    .horizontal-list::-webkit-scrollbar {
-      display: none;
-    }
+    @include invisbleScrollbars;
   }
 
   &__hour {

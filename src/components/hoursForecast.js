@@ -1,8 +1,8 @@
-import { rootElement } from "../main.js";
+import { getAppRoot } from "../main.js";
 
 export function appendForecastUI(component) {
   if (!component) {
-    component = rootElement;
+    component = getAppRoot();
   }
   const forecastHtml = getForecastHtml();
   component.appendChild(forecastHtml);

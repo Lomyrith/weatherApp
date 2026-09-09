@@ -22,3 +22,9 @@ export function setBackgroundImageForComponent(component, data) {
     );
   }
 }
+
+export function hideBackgroundForComponent(component) {
+  if (component.classList.contains("showBackground")) {
+    component.classList.remove("showBackground");
+  }
+}

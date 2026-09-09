@@ -1,9 +1,8 @@
-import { rootElement } from "../main.js";
-import { logConsole, createElement } from "../utils.js";
+import { createElement } from "../utils.js";
 
 export function appendDailyForecastUI(component) {
   if (!component) {
-    component = rootElement;
+    return;
   }
   const dailyForecastHtml = getDailyForecastContainertHtml();
   component.appendChild(dailyForecastHtml);
