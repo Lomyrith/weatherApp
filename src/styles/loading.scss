@@ -2,19 +2,24 @@
 @use "mixins" as *;
 .loading {
   position: fixed;
+  inset: 0;
   z-index: 999;
-  height: 100vh;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  font-family: $text-font;
   margin: 0px;
+  height: 100vh;
+  width: 100vw;
+  background: rgba(0, 0, 0, 0.65);
 
-  @include largeScreens {
-    height: $largeScreens--max-Heigth;
-  }
+  font-family: $text-font;
+
+  // @include largeScreens {
+  //   height: $largeScreens--max-Heigth;
+  // }
 
   &__message {
     font-size: 1.5rem;

@@ -1,28 +1,26 @@
-import { rootElement } from "../main.js";
-
 export function renderLoadingScreen(message = "Lade Daten...") {
-  rootElement.innerHTML = getLoadingHtml(message);
-}
+  let loading = document.querySelector(".loading");
 
-export function showLoadingScreen(message = "Lade Daten...") {
-  let loading = rootElement.querySelector(".loading");
   if (!loading) {
-    this.renderLoadingScreen(message);
-  } else {
-    loading.style.display = "flex";
+    document.body.insertAdjacentHTML("beforeend", getLoadingHtml(message));
   }
 }
 
-export function hideLoadingScreen(message = "Lade Daten...") {
-  console.log("hideLoadingScreen");
-  console.log(rootElement);
-  console.log(rootElement.classList);
-  var loading = rootElement.querySelector(".loading");
+export function showLoadingScreen(message = "Lade Daten...") {
+  let loading = document.querySelector(".loading");
 
   if (!loading) {
-    return;
-  } else {
-    console.log("hideLoadingScreen--hide");
+    renderLoadingScreen(message);
+    loading = document.querySelector(".loading");
+  }
+
+  loading.style.display = "flex";
+}
+
+export function hideLoadingScreen() {
+  const loading = document.querySelector(".loading");
+
+  if (loading) {
     loading.style.display = "none";
   }
 }
@@ -30,7 +28,7 @@ export function hideLoadingScreen(message = "Lade Daten...") {
 function getLoadingHtml(message = "Lade Daten...") {
   const component = `
       <div class="loading">
-        <div class="loading_message">${message}</div>
+        <div class="loading__message">${message}</div>
         <div class="lds-default">
           <div></div>
           <div></div>

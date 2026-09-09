@@ -48,7 +48,7 @@
     justify-content: flex-start;
     font-size: 0.5rem;
     width: 100%;
-    min-height: 3rem;
+    min-height: 2rem;
     padding: 0 0.5rem;
   }
 
@@ -57,16 +57,16 @@
     -webkit-appearance: none;
     appearance: none;
     box-sizing: border-box;
-    font-size: 0.7rem;
+    font-size: 1rem;
     color: $text-color;
     width: 100%;
+    min-height: 2.5rem;
+    margin: 0;
+    padding: 0 0.5rem;
     background-color: transparent;
     border: 1px solid black;
     border-radius: $border-radius;
     outline: none;
-    margin: 0;
-    padding: 0.5rem;
-    min-height: 2rem;
 
     &::placeholder {
       color: color.adjust($text-color, $lightness: -10%);
@@ -127,9 +127,96 @@
       color: color.adjust($text-color, $lightness: -20%);
     }
   }
+}
 
-  &__ListContainer {
+.overView__favorite {
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
     flex: 1;
     overflow-y: auto;
+    margin: 0;
+    padding: 1rem 0.5rem;
+    // padding-top: 1rem;
+    // padding-bottom: 1rem;
+    // padding-left: 0.5rem;
+    // padding-right: 0.5rem;
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+    padding: 0.5rem 0.7rem;
+    margin: 0;
+    cursor: pointer;
+    transition: background-color 0.15s ease-in-out;
+    border-radius: $border-radius;
+    border: 1px solid var(--surface-border);
+    box-shadow: var(--surface-shadow);
+
+    background-color: $listItem-background-color;
+    color: $text-color;
+    text-shadow: $text-shadow;
+
+    //background-Image
+    background-image:
+      linear-gradient(rgba(0, 0, 0, 0.28), rgba(0, 0, 0, 0.28)),
+      var(--detail-condition-image);
+    background-size: cover;
+    background-position: center;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &:hover {
+      border-color: $button-color--hover;
+    }
+  }
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  &__location {
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 0.7;
+  }
+
+  &__city {
+    font-size: 1.5rem;
+    font-weight: 300;
+    opacity: 0.9;
+    margin-top: 2px;
+    margin-bottom: 0;
+  }
+
+  &__country {
+    font-size: 1rem;
+    font-weight: 300;
+    opacity: 0.9;
+    margin-top: 0.5rem;
+    color: adjust-color($text-color, $lightness: -20%);
+  }
+
+  &__temperature {
+    font-size: 3rem;
+    font-weight: 200;
+    line-height: 1;
+    letter-spacing: -2px;
+  }
+
+  &__subInfo {
+    font-size: 0.9rem;
+    font-weight: 400;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 1rem 0 0 0;
   }
 }

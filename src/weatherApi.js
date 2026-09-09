@@ -6,9 +6,13 @@ export async function getCurrentWeather(location = "Arnsberg") {
 
   const response = await fetch(url);
 
-  const data = await response.json();
+  if (!response.ok) {
+    throw new Error(
+      `Weather API error (getCurrentWeather): ${response.status}`,
+    );
+  }
 
-  return data;
+  return response.json();
 }
 
 export async function getCitySuggestions(query) {
@@ -17,9 +21,13 @@ export async function getCitySuggestions(query) {
 
   const response = await fetch(url);
 
-  const data = await response.json();
+  if (!response.ok) {
+    throw new Error(
+      `Weather API error (getCitySuggestions): ${response.status}`,
+    );
+  }
 
-  return data;
+  return response.json();
 }
 
 export async function getForecastWeather(
@@ -32,7 +40,11 @@ export async function getForecastWeather(
 
   const response = await fetch(url);
 
-  const data = await response.json();
+  if (!response.ok) {
+    throw new Error(
+      `Weather API error (getForecastWeather): ${response.status}`,
+    );
+  }
 
-  return data;
+  return response.json();
 }

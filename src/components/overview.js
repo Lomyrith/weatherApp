@@ -1,17 +1,24 @@
 import { rootElement } from "../main.js";
 import { createElement } from "../utils.js";
+import { setBackgroundImageForComponent } from "./background.js";
 
 export class Overview {
-  constructor({ onSearchCity, onSelectCity }) {
+  constructor(favoriteData = [], { onSearchCity, onSelectCity }) {
+    this.favoriteCities = favoriteData;
     this.onSearchCity = onSearchCity;
     this.onSelectCity = onSelectCity;
     this.init();
   }
 
   init() {
+    this.render();
+    this.bindEvents();
+  }
+
+  render() {
     rootElement.innerHTML = this.getOverviewTemplate();
 
-    this.bindEvents();
+    this.renderFavorites();
   }
 
   getOverviewTemplate() {
@@ -30,7 +37,7 @@ export class Overview {
           />
           <ul class="overView__searchSuggestions" style="display: none;"></ul>  
         </div>
-        <div class="overView__Favorites">Favoriten</div>
+        <ul class="overView__favorite__list"></ul>
       </div>`.trim();
   }
 
@@ -130,6 +137,67 @@ export class Overview {
     );
     if (suggestionsList) {
       suggestionsList.style.display = "none";
+    }
+  }
+
+  renderFavorites() {
+    const favList = rootElement.querySelector(".overView__favorite__list");
+
+    if (favList) {
+      console.log("render FavList", this.favoriteCities);
+
+      [...this.favoriteCities].forEach((item) => {
+        console.log(item);
+
+        let favorite = createElement("li", "overView__favorite__item");
+
+        favorite.addEventListener("click", () => {
+          console.log("favorite clicked", item.location.name);
+          this.onSelectCity(item.location);
+        });
+
+        //TOdo background --favorite-${favorite_city}-condition-image
+        const header = createElement("div", "overView__favorite__header");
+        const location = createElement("div", "overView__favorite__location");
+
+        const cityName = createElement(
+          "p",
+          "overView__favorite__city",
+          item.location.name,
+        );
+        const country = createElement(
+          "p",
+          "overView__favorite__country",
+          item.location.country,
+        );
+
+        const temp = createElement(
+          "span",
+          "overView__favorite__temperature",
+          item.current.temp_c,
+        );
+
+        let subInfoText = item.current.condition.text;
+        if (item.forecast.forecastday[0]?.day) {
+          subInfoText += ` H:${item.forecast.forecastday[0].day.maxtemp_c} T:${item.forecast.forecastday[0].day.mintemp_c}°C`;
+        }
+        const subInfo = createElement(
+          "p",
+          "overView__favorite__subInfo",
+          subInfoText,
+        );
+
+        header.appendChild(location);
+        location.appendChild(cityName);
+        location.appendChild(country);
+        header.appendChild(temp);
+        favorite.appendChild(header);
+        favorite.appendChild(subInfo);
+
+        setBackgroundImageForComponent(favorite, item);
+
+        favList.appendChild(favorite);
+      });
     }
   }
 }

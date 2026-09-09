@@ -1,0 +1,40 @@
+@use "variables" as *;
+
+.detailHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  &__backButton {
+    cursor: pointer;
+    text-decoration: none;
+    background-color: $button-color;
+    color: $text-color;
+    font-size: 0.7rem;
+    font-weight: bold;
+    border-radius: $border-radius;
+    padding: 0.5rem;
+    margin-top: 0;
+    margin-right: 0.2rem;
+
+    &:hover {
+      background-color: $button-color--hover;
+    }
+  }
+  &__favoriteButton {
+    cursor: pointer;
+    text-decoration: none;
+    background-color: $button-color;
+    color: $text-color;
+    font-size: 0.7rem;
+    font-weight: bold;
+    border-radius: $border-radius;
+    padding: 0.5rem;
+    margin-top: 0;
+    margin-right: 0.2rem;
+
+    &:hover {
+      background-color: $button-color--hover;
+    }
+  }
+}
