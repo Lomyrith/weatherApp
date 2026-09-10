@@ -19,6 +19,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    padding: $main-padding;
   }
 
   &__Title {
@@ -30,12 +31,13 @@
     text-decoration: none;
     background-color: $button-color;
     color: $text-color;
-    font-size: 0.7rem;
+    font-size: 1rem;
     font-weight: bold;
     border-radius: $border-radius;
     padding: 0.5rem;
     margin-top: 0;
     margin-right: 0.2rem;
+    margin-bottom: 0.5rem;
 
     &:hover {
       background-color: $button-color--hover;
@@ -51,7 +53,7 @@
     font-size: 0.5rem;
     width: 100%;
     min-height: 2rem;
-    padding: 0 0.5rem;
+    padding: $main-padding;
   }
 
   // Auf gleicher Ebene wie SearchContainer schachteln:
@@ -87,7 +89,7 @@
     left: 0.5rem;
     right: 0.5rem;
     margin: 0;
-    padding: 0;
+    padding: $main-padding;
     list-style: none;
     z-index: 1000;
     max-height: 250px;
@@ -140,13 +142,10 @@
     gap: 0.3rem;
     flex: 1;
     margin: 0;
-    padding: 1rem 0.5rem;
+    padding: $main-padding;
+    margin-top: 1rem;
     min-height: 10rem;
     overflow-y: auto;
-    // padding-top: 1rem;
-    // padding-bottom: 1rem;
-    // padding-left: 0.5rem;
-    // padding-right: 0.5rem;
   }
 
   &__item {
@@ -166,12 +165,7 @@
     color: $text-color;
     text-shadow: $text-shadow;
 
-    //background-Image
-    background-image:
-      linear-gradient(rgba(0, 0, 0, 0.28), rgba(0, 0, 0, 0.28)),
-      var(--detail-condition-image);
-    background-size: cover;
-    background-position: center;
+    @include backgroundImageBase;
 
     &:last-child {
       border-bottom: none;
@@ -206,7 +200,7 @@
     font-weight: 300;
     opacity: 0.9;
     margin-top: 0.5rem;
-    color: adjust-color($text-color, $lightness: -20%);
+    color: color.adjust($text-color, $lightness: -15%);
   }
 
   &__temperature {
@@ -219,6 +213,9 @@
       content: "°";
     }
   }
+  &__deleteButton {
+    display: none;
+  }
 
   &__subInfo {
     font-size: 0.9rem;
@@ -227,5 +224,21 @@
     overflow: hidden;
     text-overflow: ellipsis;
     margin: 1rem 0 0 0;
+  }
+}
+
+.is-editing {
+  .overView__favorite__deleteButton {
+    display: block;
+    @include buttonBase;
+    height: 3rem;
+    width: 3rem;
+    margin: 0;
+    padding: 0;
+    color: $delete-color;
+  }
+
+  .overView__favorite__temperature {
+    display: none;
   }
 }

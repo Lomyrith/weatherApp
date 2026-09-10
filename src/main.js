@@ -36,7 +36,6 @@ var overView = undefined;
 
 ///////////////////////////////////////////////////
 showOverview();
-//showDetails(tempCity);
 
 async function showOverview() {
   rootElement.innerHTML = "";
@@ -59,12 +58,23 @@ async function showOverview() {
 
     const onSelectCity = async (selectedValue) => {
       console.log("onSelectCity", selectedValue);
-      await showDetails(selectedValue.name);
+
+      let isFavorite = favorites.includes(selectedValue.name);
+      await showDetails(selectedValue.name, isFavorite);
+    };
+
+    const onDeleteFavorite = (city) => {
+      console.log("onDeleteFavorite", city);
+      const newFavorites = favorites.filter((item) => item !== city);
+      localStorage.setItem("favorites", JSON.stringify(newFavorites));
+      refreshFavorites();
+      overView.removeFromFavorites(city);
     };
 
     overView = new Overview(favoriteWeatherData, {
       onSearchCity,
       onSelectCity,
+      onDeleteFavorite,
     });
 
     hideBackgroundForComponent(getAppRoot());
@@ -76,18 +86,22 @@ async function showOverview() {
   }
 }
 
-async function showDetails(value) {
+async function showDetails(value, isFavorite) {
   rootElement.innerHTML = "";
   rootElement.appendChild(createElement("div", "detailRoot showBackground"));
 
-  console.log("showDetails");
+  console.log("showDetails", value, isFavorite);
   console.log(value);
   renderLoadingScreen(`Lade Wetterdaten für ${value}...`);
 
-  loadDetailHeaderInfos(value, {
+  loadDetailHeaderInfos(value, isFavorite, {
     goBack: () => showOverview(),
     setFavorite: (city) => {
       saveCityToFavorites(city);
+      var favBtn = document.querySelector(".detailHeader__favoriteButton");
+      if (favBtn) {
+        favBtn.classList.toggle("is-favorite");
+      }
     },
   });
 

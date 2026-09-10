@@ -1,12 +1,16 @@
-import { getAppRoot } from "../main.js";
+import { getAppRoot, rootElement } from "../main.js";
 import { createElement } from "../utils.js";
 import { setBackgroundImageForComponent } from "./background.js";
-
+let isEditing = false;
 export class Overview {
-  constructor(favoriteData = [], { onSearchCity, onSelectCity }) {
+  constructor(
+    favoriteData = [],
+    { onSearchCity, onSelectCity, onDeleteFavorite },
+  ) {
     this.favoriteCities = favoriteData;
     this.onSearchCity = onSearchCity;
     this.onSelectCity = onSelectCity;
+    this.onDeleteFavorite = onDeleteFavorite;
     this.init();
   }
 
@@ -17,7 +21,6 @@ export class Overview {
 
   render() {
     getAppRoot().innerHTML = this.getOverviewTemplate();
-
     this.renderFavorites();
   }
 
@@ -48,6 +51,12 @@ export class Overview {
       changeBtn.addEventListener("click", (e) => {
         e.preventDefault();
         console.log("change Button clicked");
+
+        isEditing = rootElement.classList.toggle("is-editing");
+
+        isEditing
+          ? (changeBtn.textContent = "Fertig")
+          : (changeBtn.textContent = "Bearbeiten");
       });
     }
 
@@ -150,7 +159,7 @@ export class Overview {
         console.log(item);
 
         let favorite = createElement("li", "overView__favorite__item");
-
+        favorite.id = item.location.name;
         favorite.addEventListener("click", () => {
           console.log("favorite clicked", item.location.name);
           this.onSelectCity(item.location);
@@ -175,6 +184,27 @@ export class Overview {
           "overView__favorite__temperature",
           item.current.temp_c,
         );
+        const deleteButton = createElement(
+          "button",
+          "overView__favorite__deleteButton",
+        );
+        deleteButton.innerHTML = `
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          min-height="24px"
+          min-width="24px"
+          viewBox="0 -960 960 960"
+          fill="current"
+        >
+          <path d="m336-280 144-144 144 144 56-56-144-144 144-144-56-56-144 144-144-144-56 56 144 144-144 144 56 56ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z" />
+        </svg>`;
+
+        deleteButton.addEventListener("click", (e) => {
+          e.stopPropagation(); //sitz! bleib! click soll nicht bis zur kartenebene aufsteigen.
+          e.preventDefault();
+          console.log("delete Button clicked");
+          this.onDeleteFavorite(item.location.name); //geht da in Schleife
+        });
 
         let subInfoText = item.current.condition.text;
         if (item.forecast.forecastday[0]?.day) {
@@ -190,6 +220,7 @@ export class Overview {
         location.appendChild(cityName);
         location.appendChild(country);
         header.appendChild(temp);
+        header.appendChild(deleteButton);
         favorite.appendChild(header);
         favorite.appendChild(subInfo);
 
@@ -197,6 +228,18 @@ export class Overview {
 
         favList.appendChild(favorite);
       });
+    }
+  }
+
+  removeFromFavorites(city) {
+    console.log("removeFromFavorites", city);
+    if (city) {
+      const favList = getAppRoot().querySelector(".overView__favorite__list");
+      const fav = favList.querySelector(`#${city}`);
+      if (fav) {
+        console.log("removeFromFavorites", fav);
+        favList.removeChild(fav);
+      }
     }
   }
 }

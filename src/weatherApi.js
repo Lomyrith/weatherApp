@@ -35,7 +35,9 @@ export async function getForecastWeather(
   days = 2,
   lang = "de",
 ) {
+  console.log("getForecastWeather", location, days, lang);
   //http://api.weatherapi.com/v1/forecast.json?key={}&q=Arnsberg&days=1&aqi=no&alerts=no
+  //const url = `${API_URL}/forecast.json?key=${API_KEY}&q=Arnsberg&days=${days}&aqi=no&alerts=no&lang=${lang}`;
   const url = `${API_URL}/forecast.json?key=${API_KEY}&q=${location}&days=${days}&aqi=no&alerts=no&lang=${lang}`;
 
   const response = await fetch(url);

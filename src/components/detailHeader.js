@@ -3,18 +3,19 @@ import { createElement } from "../utils";
 
 export async function loadDetailHeaderInfos(
   value = "Berlin",
+  isFavrorite = false,
   { goBack, setFavorite },
 ) {
-  renderDetailHeaderInfos(goBack, setFavorite);
+  renderDetailHeaderInfos(isFavrorite, goBack, setFavorite);
 }
 
-function renderDetailHeaderInfos(goBack, setFavorite) {
+function renderDetailHeaderInfos(isFavrorite, goBack, setFavorite) {
   const detailHeaders = getdetailHeadersHtml();
   getAppRoot().innerHTML += detailHeaders;
 
   const header = getAppRoot().querySelector(".detailHeader__top");
   header.prepend(getBackButton(goBack));
-  header.append(getFavoriteButton(setFavorite));
+  header.append(getFavoriteButton(isFavrorite, setFavorite));
   console.log("header detailHeaders", header);
 }
 
@@ -55,11 +56,10 @@ function getBackButton(goBack) {
   return backBtn;
 }
 
-function getFavoriteButton(setFavorite) {
-  const favoriteBtn = createElement("button", "detailHeader__backButton");
+function getFavoriteButton(isFavorite, setFavorite) {
+  const favoriteBtn = createElement("button", "detailHeader__favoriteButton");
   favoriteBtn.addEventListener("click", (e) => {
     e.preventDefault();
-    console.log("setFavorite");
     const currentLocation = getAppRoot().querySelector(
       ".detailHeader__location",
     )?.textContent;
@@ -75,6 +75,11 @@ function getFavoriteButton(setFavorite) {
     >
       <path d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-350Z" />
     </svg>`;
+  console.log("###########getFavoriteButton.isFavorite:", isFavorite);
+
+  if (isFavorite) {
+    favoriteBtn.classList.add("is-favorite");
+  }
 
   return favoriteBtn;
 }
